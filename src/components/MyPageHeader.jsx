@@ -1,35 +1,34 @@
+import React from "react";
 import {
-  Avatar,
-  Divider,
-  PageHeader,
   Typography,
   Input,
   Space,
   Badge,
   Tooltip,
   Button,
+  Grid,
+  Avatar,
 } from "antd";
 import {
-  ProjectOutlined,
   BellOutlined,
-  SearchOutlined,
   ShoppingCartOutlined,
+  HeartOutlined,
+  HeartFilled,
 } from "@ant-design/icons";
 import dimens from "../constants/dimens";
+import contexts from "../contexts/contexts";
 
 const { Title } = Typography;
 const { Search } = Input;
+const { useBreakpoint } = Grid;
 
 const MyPageHeader = () => {
+  const { wistlists, cart } = React.useContext(contexts);
+  const screens = useBreakpoint();
+  // const xs = screens.xs;
+  console.log(screens);
+
   return (
-    // <PageHeader
-    //   className="site-page-header"
-    //   onBack={() => null}
-    //   title="Title"
-    //   backIcon={<ProjectOutlined/>}
-    //   subTitle="This is a subtitle"
-    //   style={{display: 'flex'}}
-    // />
     <div
       style={{
         height: 75,
@@ -45,23 +44,39 @@ const MyPageHeader = () => {
         style={{
           display: "flex",
           flex: 1,
-          paddingTop: "16px",
           // backgroundColor: "green",
           height: 75,
         }}
       >
-        <Space size="large" align="center">
-          <Typography>
-            <Title level={1}>LOGO</Title>
-          </Typography>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: "100%",
+            // backgroundColor: "red",
+          }}
+        >
+          <img src="https://www.dynadot.com/domain/logo/shop-logo1483672083.png" height={40}/>
 
           <Search
-            style={{ marginTop: "5px" }}
+            style={{
+              // marginTop: "5px",
+              width: `${screens.xs ? "100%" : "400px"}`,
+              marginLeft: 20,
+              marginRight: 20,
+            }}
             placeholder="input search text"
             onSearch={(kay) => alert(`Search key is ${kay}`)}
             enterButton
           />
-        </Space>
+
+          <Badge count={cart.length}>
+            <Tooltip title="My Cart">
+              <Button shape="circle" icon={<ShoppingCartOutlined />} />
+            </Tooltip>
+          </Badge>
+        </div>
       </div>
 
       {/* <Divider
@@ -80,9 +95,18 @@ const MyPageHeader = () => {
         }}
       >
         <Space size="middle">
-          <Badge count={2}>
-            <Tooltip title="My Cart">
-              <Button shape="circle" icon={<ShoppingCartOutlined />} />
+          <Badge count={wistlists.length}>
+            <Tooltip title="My Wistlist">
+              <Button
+                shape="circle"
+                icon={
+                  wistlists.length > 0 ? (
+                    <HeartFilled style={{ color: "red" }} />
+                  ) : (
+                    <HeartOutlined />
+                  )
+                }
+              />
             </Tooltip>
           </Badge>
 

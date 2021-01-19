@@ -4,19 +4,22 @@ import "./index.css";
 import RouteApp from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Switch } from "react-router-dom";
+import GlobalState from "./contexts/GlobalState";
 import HomePage from "./pages/HomePage";
 import ProductsPage from "./pages/ProductsPage";
 import NewOrder from "./pages/NewOrder";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Switch>
-        <RouteApp exact path={"/neworder"} component={NewOrder} />
-        <RouteApp exact path={"/products"} component={ProductsPage} />
-        <RouteApp exact path={"/"} component={HomePage} />
-      </Switch>
-    </BrowserRouter>
+    <GlobalState>
+      <BrowserRouter>
+        <Switch>
+          <RouteApp exact path={"/neworder"} component={NewOrder} />
+          <RouteApp exact path={"/products"} component={ProductsPage} />
+          <RouteApp exact path={"/"} component={HomePage} />
+        </Switch>
+      </BrowserRouter>
+    </GlobalState>
     {/* <App /> */}
   </React.StrictMode>,
   document.getElementById("root")
