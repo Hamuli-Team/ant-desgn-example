@@ -7,6 +7,8 @@ import React from "react";
 // });
 
 export default React.createContext({
+    data: [],
+    setData: () => {},
     wistlists: [],
     addWistlist: () => {},
     deleteWishlist: () => {},

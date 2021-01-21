@@ -15,7 +15,7 @@ const LayoutWithRoute = ({ children }) => {
       <MyMenu/>
     </Sider>
     <Layout>
-      <Header style={{ height: 75, backgroundColor: "#fff", padding: 0 }}>
+      <Header style={{ height: 75, backgroundColor: "#fff", padding: 0,}}>
         <MyPageHeader />
       </Header>
       <Content>{children}</Content>

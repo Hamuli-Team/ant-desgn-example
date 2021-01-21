@@ -1,14 +1,8 @@
 import React from "react";
 import { Menu, Typography } from "antd";
 import {
-  AppstoreOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
   ContainerOutlined,
   PlusCircleOutlined,
-  ProjectOutlined,
   CarryOutOutlined,
   ShoppingOutlined,
   ShopOutlined,

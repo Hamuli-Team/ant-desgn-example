@@ -1,3 +1,5 @@
+import React from "react";
+
 import {
   Card,
   Space,
@@ -12,7 +14,6 @@ import {
   Tooltip,
   Button,
 } from "antd";
-import React from "react";
 
 import {
   HeartOutlined,
@@ -20,7 +21,7 @@ import {
   ShoppingCartOutlined,
   PlusOutlined,
   MinusOutlined,
-  MoneyCollectOutlined,
+  DollarCircleOutlined,
 } from "@ant-design/icons";
 import contexts from "../contexts/contexts";
 import CardToCart from "./CardToCart";
@@ -30,10 +31,14 @@ const { Title } = Typography;
 
 const ProductCard = ({ item }) => {
   const { addWistlist, deleteWishlist, addCart } = React.useContext(contexts);
-  const [amount, setAmount] = React.useState(0);
+  const [amount, setAmount] = React.useState(1);
   const [isAdded, setIsAdded] = React.useState(false);
   const [add2Cart, setAdd2Cart] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log("Get re-render: ", item.id);
+  }, []);
 
   function showNoti(status, message) {
     if (status === "success") {
@@ -54,12 +59,7 @@ const ProductCard = ({ item }) => {
   return (
     <Card
       style={{ width: "100%" }}
-      cover={
-        <img
-          src={item.imgUrl}
-          style={{ backgroundColor: "red", height: 200 }}
-        />
-      }
+      cover={<img src={item.imgUrl} style={{ height: 200 }} />}
       actions={[
         <Space
           onClick={() => {
@@ -205,7 +205,7 @@ const ProductCard = ({ item }) => {
               <Button
                 type="primary"
                 size="large"
-                icon={<MoneyCollectOutlined />}
+                icon={<DollarCircleOutlined />}
               >
                 Buy Now
               </Button>
@@ -214,9 +214,14 @@ const ProductCard = ({ item }) => {
                 size="large"
                 icon={<ShoppingCartOutlined />}
                 onClick={() => {
-                  addCart(item);
-                  setShowModal(false);
-                  showNoti("success", "Added to your Cart.");
+                  if (amount > 0) {
+                    addCart(item);
+                    setShowModal(false);
+                    showNoti("success", "Added to your Cart.");
+                  } else {
+                    showNoti("warning", "Quantity must be atlease 1!");
+                    return;
+                  }
                 }}
               >
                 Add to Cart
@@ -229,4 +234,5 @@ const ProductCard = ({ item }) => {
   );
 };
 
-export default ProductCard;
+export default React.memo(ProductCard);
+// export default ProductCard;

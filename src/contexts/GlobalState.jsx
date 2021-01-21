@@ -1,10 +1,17 @@
 import React from "react";
 
 import Context from "./contexts";
+import dummyData from "../data/dummy-data";
 
 const GlobalState = (props) => {
+  const [data, setData] = React.useState([]);
   const [wistlists, setWistlists] = React.useState([]);
   const [cart, setCart] = React.useState([]);
+
+  //initialize data on app start
+  React.useEffect(() => {
+    setData(dummyData);
+  }, []);
 
   // this is for wistlist
   const addWistlist = (item) => {
@@ -31,6 +38,8 @@ const GlobalState = (props) => {
   return (
     <Context.Provider
       value={{
+        data: data,
+        setData: setData,
         wistlists: wistlists,
         addWistlist: addWistlist,
         deleteWishlist: deleteWishlist,
