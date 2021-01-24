@@ -37,6 +37,9 @@ const MyPageHeader = () => {
         alignItems: "center",
         // backgroundColor: "red",
         padding: dimens.defaultPadding,
+        borderBottomStyle: 'solid',
+        borderBottomColor: '#ddd',
+        borderBottomWidth: 1,
       }}
     >
       {/* This is the logo go here */}
@@ -51,31 +54,38 @@ const MyPageHeader = () => {
         <div
           style={{
             display: "flex",
+            flex: 1,
             justifyContent: "space-between",
             alignItems: "center",
             height: "100%",
-            // backgroundColor: "red",
           }}
         >
-          <img src="https://www.dynadot.com/domain/logo/shop-logo1483672083.png" height={40}/>
-
-          <Search
-            style={{
-              // marginTop: "5px",
-              width: `${screens.xs ? "100%" : "400px"}`,
-              marginLeft: 20,
-              marginRight: 20,
-            }}
-            placeholder="input search text"
-            onSearch={(kay) => alert(`Search key is ${kay}`)}
-            enterButton
+          <img
+            src="https://www.dynadot.com/domain/logo/shop-logo1483672083.png"
+            height={40}
           />
 
-          <Badge count={cart.length}>
-            <Tooltip title="My Cart">
-              <Button shape="circle" icon={<ShoppingCartOutlined />} />
-            </Tooltip>
-          </Badge>
+          <div style={{ display: "flex", alignItems: "center"}}>
+            <Search
+              style={{
+                // marginTop: "5px",
+                width: `${screens.xs ? "100%" : "500px"}`,
+                marginLeft: 10,
+                marginRight: 10,
+              }}
+              size="large"
+              placeholder="Search in Shop"  
+              onSearch={(kay) => alert(`Search key is ${kay}`)}
+              enterButton
+            />
+
+            <Badge count={cart.length}>
+              <Tooltip title="My Cart">
+                <Button shape="circle" icon={<ShoppingCartOutlined />} />
+              </Tooltip>
+            </Badge>
+          </div>
+          <div />
         </div>
       </div>
 
